@@ -3,8 +3,9 @@
 </script>
 
 <PostIt child_count={2}>
-	<PostIt is_child={true}>Benoit</PostIt>
-	<PostIt is_child={true}>Arnaud</PostIt>
+	Function
+	<PostIt is_child={true}>VarA</PostIt>
+	<PostIt is_child={true}>VarB</PostIt>
 </PostIt>
 
-<PostIt is_child={false}>Quentin</PostIt>
+<PostIt is_child={false}>VarC</PostIt>

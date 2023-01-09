@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { specialKeys, screenHeight, screenWight, isMouseUp, mousePosition } from '$lib/store.ts';
 
+	import { Box, Func, Variable } from '$lib/class.ts';
+
+	let box: Box = new Box("boxA");
+	let func: Func = new Func("funcA");
+	let var_: Variable = new Variable("var_A");
+
 	const FIXED_COLOR = 'black';
 	const FIXED_SHADOW = 0;
 	const DRAGGING_COLOR = 'red';
@@ -18,12 +24,17 @@
 	let boxPosition = { x: 0, y: 0 };
 	let boxSize = BASIC_BOX_SIZE;
 	if (child_count) {
-		boxSize.y = boxSize.y * 1.2
+		boxSize.y = boxSize.y * 1.2;
 		boxSize.x = boxSize.x * child_count + GAP * child_count;
 	}
 	let deltaMouseBox = { x: 0, y: 0 };
 	let border = { color: 'black', size: 1 };
 	let isDragging: bool = false;
+
+	let css = { position: 'absolute' };
+	if (is_child) {
+		css.position = 'relative';
+	}
 
 	function handleMouseDown(event) {
 		if (!$specialKeys.control || is_child) return;
@@ -62,11 +73,10 @@
 		boxPosition.x -= deltaMouseBox.x;
 		boxPosition.y -= deltaMouseBox.y;
 	});
-
 </script>
 
 <div
-		class="post-it {BACKGROUD_COLOR}"
+	class="post-it {BACKGROUD_COLOR} {css.position}"
 	style="
 		   left: {boxPosition.x}px;
 		   top: {boxPosition.y}px;
@@ -82,16 +92,10 @@
 
 <style>
 	.post-it {
-		--s: 200px; /* control the size */
-		--r: 42px; /* control the circular shapes */
-
 		border-radius: 15px;
-		position: absolute;
+		/*position: absolute;*/
 		user-select: none; /* permet de ne pas select le text */
-		/*
-		mask: radial-gradient(calc(var(--r)) at calc(100%) 50%, #0000 95%, #000) top/100%
-				calc(100% - var(--r)) no-repeat,
-			radial-gradient(var(--r) at left 50% bottom var(--r), #000 95%, #0000);
-			*/
+
+		display: flex;
 	}
 </style>
