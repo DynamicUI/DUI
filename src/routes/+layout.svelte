@@ -29,7 +29,7 @@
 		*/
 
 	import '$lib/app.css';
-	import { EventHandlerSetUp, Navbar, PostIt, Sidebar } from '$lib/components';
+	import { EventHandlerSetUp, Navbar, Sidebar } from '$lib/components';
 	import { screenHeight, screenWight, isMouseUp, mousePosition } from '$lib/store.ts';
 
 	let sidebar = false;
