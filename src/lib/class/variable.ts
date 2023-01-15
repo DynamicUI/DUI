@@ -1,25 +1,40 @@
-import { Vec2 } from '$lib/class/vec2.ts';
-import { BoxType, Box } from '$lib/class/box.ts';
+import { Vec2 } from '$lib/class/vec2';
+import { BoxType, Box, type ConstBoxInfos } from '$lib/class/box';
+
+// specifique a la class Variable
+const CONST_BOX_INFOS: ConstBoxInfos = {
+	FIXED_COLOR: 'black',
+	DRAGGING_COLOR: 'red',
+	BACKGROUD_COLOR: 'bg-teal-100',
+	SHADOW_COLOR: 'grey',
+	SHADOW_BLUR: 5,
+	FIXED_SHADOW: 0,
+	DRAGGING_DELTA: 4,
+	BASIC_BOX_SIZE: new Vec2(100, 100),
+	GAP: 20
+};
+
+export enum VarType {
+	INT,
+	STRING,
+	FLOAT,
+	OTHER
+}
 
 /// Class specifique qui contient tout ce qui concerne les Box Varibles
 export class Variable {
 	box: Box;
-	ui_info: ConstBoxInfos = {
-		FIXED_COLOR: 'black',
-		DRAGGING_COLOR: 'red',
-		BACKGROUD_COLOR: 'bg-teal-100',
-		SHADOW_COLOR: 'grey',
-		SHADOW_BLUR: 5,
-		FIXED_SHADOW: 0,
-		DRAGGING_DELTA: 4,
-		BASIC_BOX_SIZE: new Vec2(100, 100),
-		GAP: 20
-	};
+	name?: string;
 
-	constructor(name: String, is_child: bool, child_count: number) {
-		this.box = new Box(name, BoxType.VARIABLE, this.ui_info);
-		this.box.child_count = child_count;
-		this.box.is_child = is_child;
+	type?: VarType;
+	value?: any;
+
+	ui_info: ConstBoxInfos = CONST_BOX_INFOS;
+
+	constructor(name: string, type: VarType | undefined = undefined, value: any = null) {
+		this.box = new Box(name, BoxType.VARIABLE, CONST_BOX_INFOS);
+		this.type = type;
+		this.value = value;
 	}
 }
 

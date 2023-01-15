@@ -30,7 +30,7 @@
 
 	import '$lib/app.css';
 	import { EventHandlerSetUp, Navbar, Sidebar } from '$lib/components';
-	import { screenHeight, screenWight, isMouseUp, mousePosition } from '$lib/store.ts';
+	import { screenHeight, screenWight, isMouseUp, mousePosition } from '$lib/store';
 
 	let sidebar = false;
 </script>
