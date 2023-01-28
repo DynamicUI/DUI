@@ -23,32 +23,22 @@ export type ConstBoxInfos = {
 /// Class qui contient tout les elements UI
 export class Box {
 	type: BoxType;
-
 	name: string;
 	id: string;
-
 	child_count: number = 0;
 	is_child: boolean = false; // if true, can't move
-
-	ui_info: ConstBoxInfos;
-
 	shadow = { delta: 0, size: 0, blur: 0 };
-	position: Vec2 = new Vec2(0, 0);
 	size: Vec2;
-
 	deltaMouseBox: Vec2 = new Vec2(0, 0);
 	border = { color: 'black', size: 1 };
 	isDragging: boolean = false;
-
 	css = { position: 'absolute', z_index: 0, cursor: 'default' };
-
 	is_hover = false;
 
 	constructor(name: string, type: BoxType, ui_info: ConstBoxInfos) {
 		this.name = name;
 		this.id = name; // TODO avoir un id autre que le name ? (avoir plusieurs fois le meme nom)
 		this.type = type;
-		this.ui_info = ui_info;
 		this.size = ui_info.BASIC_BOX_SIZE;
 		this.shadow.blur = ui_info.SHADOW_BLUR;
 		if (this.child_count) {
@@ -58,35 +48,5 @@ export class Box {
 		if (this.is_child) {
 			this.css.position = 'relative';
 		}
-	}
-
-	handleMouseOver() {
-		this.is_hover = true;
-	}
-
-	handleMouseOut() {
-		this.is_hover = false;
-	}
-
-	/*
-	updatePosition(mousePosition: Vec2) {
-		this.boxPosition = mousePosition;
-		this.boxPosition.x -= this.deltaMouseBox.x;
-		this.boxPosition.y -= this.deltaMouseBox.y;
-	}
-	*/
-
-	updateDrag(isDragging: bool) {
-		this.border.color = isDragging ? this.ui_info.DRAGGING_COLOR : this.ui_info.FIXED_COLOR;
-		this.shadow.delta = isDragging ? this.ui_info.DRAGGING_DELTA : this.ui_info.FIXED_SHADOW;
-		this.shadow.size = isDragging ? this.ui_info.DRAGGING_DELTA : this.ui_info.FIXED_SHADOW;
-		// TODO vec op
-		this.position.x += isDragging ? -this.ui_info.DRAGGING_DELTA : this.ui_info.DRAGGING_DELTA;
-		this.position.y += isDragging ? -this.ui_info.DRAGGING_DELTA : this.ui_info.DRAGGING_DELTA;
-	}
-
-	updateDeltaMouse(mousePosition: Vec2) {
-		this.deltaMouseBox.x = mousePosition.x - this.position.x;
-		this.deltaMouseBox.y = mousePosition.y - this.position.y;
 	}
 }

@@ -2,17 +2,6 @@ import { Vec2 } from '$lib/class/vec2';
 import { BoxType, Box, type ConstBoxInfos } from '$lib/class/box';
 
 // specifique a la class Variable
-const CONST_BOX_INFOS: ConstBoxInfos = {
-	FIXED_COLOR: 'black',
-	DRAGGING_COLOR: 'red',
-	BACKGROUD_COLOR: 'bg-teal-100',
-	SHADOW_COLOR: 'grey',
-	SHADOW_BLUR: 5,
-	FIXED_SHADOW: 0,
-	DRAGGING_DELTA: 4,
-	BASIC_BOX_SIZE: new Vec2(100, 100),
-	GAP: 20
-};
 
 export enum VarType {
 	INT,
@@ -25,17 +14,26 @@ export enum VarType {
 export class Variable {
 	box: Box;
 	name?: string;
-
 	type?: VarType;
 	value?: any;
 
-	ui_info: ConstBoxInfos = CONST_BOX_INFOS;
-
 	constructor(name: string, type: VarType | undefined = undefined, value: any = null) {
-		this.box = new Box(name, BoxType.VARIABLE, CONST_BOX_INFOS);
+		this.box = new Box(name, BoxType.VARIABLE, Variable.CONST_BOX_INFOS);
 		this.type = type;
 		this.value = value;
 	}
+
+	static CONST_BOX_INFOS: ConstBoxInfos = {
+		FIXED_COLOR: 'black',
+		DRAGGING_COLOR: 'red',
+		BACKGROUD_COLOR: 'bg-teal-100',
+		SHADOW_COLOR: 'grey',
+		SHADOW_BLUR: 5,
+		FIXED_SHADOW: 0,
+		DRAGGING_DELTA: 4,
+		BASIC_BOX_SIZE: new Vec2(200, 100),
+		GAP: 20
+	};
 }
 
 /* reflection sur comment s'occuper de tous ces blocks:
