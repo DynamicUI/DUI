@@ -3,6 +3,5 @@
 	import { EventHandlerSetUp } from '$lib/components';
 </script>
 
-<EventHandlerSetUp>
-	<slot />
-</EventHandlerSetUp>
+<slot />
+<EventHandlerSetUp />

@@ -3,6 +3,7 @@
 	import { Variable } from '$lib/class/variable';
 	import V from './V.svelte';
 	import { BoxType, Box } from '$lib/class/box';
+	import Sequencer from './Sequencer.svelte';
 
 	let vars = [new Variable('Var 1', undefined, 0), new Variable('Var 2', undefined, 0)];
 
@@ -15,8 +16,17 @@
 	console.log(b.size);
 </script>
 
+
+<Sequencer></Sequencer>
+
+<!--
+
+
 {#each vars as v (v.box.id)}
 	<V><VariableBox bind:variable={v} bind:box={b} /></V>
 {/each}
 
 <button on:click={addVar} class="btn text-accent-content bg-accent">+</button>
+
+
+-->

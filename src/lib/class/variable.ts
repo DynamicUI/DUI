@@ -18,6 +18,7 @@ export class Variable {
 	value?: any;
 
 	constructor(name: string, type: VarType | undefined = undefined, value: any = null) {
+		this.name = name;
 		this.box = new Box(name, BoxType.VARIABLE, Variable.CONST_BOX_INFOS);
 		this.type = type;
 		this.value = value;
@@ -31,7 +32,7 @@ export class Variable {
 		SHADOW_BLUR: 5,
 		FIXED_SHADOW: 0,
 		DRAGGING_DELTA: 4,
-		BASIC_BOX_SIZE: new Vec2(200, 100),
+		BASIC_BOX_SIZE: new Vec2(300, 100),
 		GAP: 20
 	};
 }

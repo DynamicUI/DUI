@@ -39,13 +39,7 @@
 	bind:innerHeight={$screenHeight}
 	on:keydown={handleKeyDown}
 	on:keyup={handleKeyUp}
-/>
-
-<div
-	style="width: {$screenWight}px; height: {$screenHeight}px;"
 	on:mouseup={handleMouseUp}
 	on:mousedown={handleMouseDown}
 	on:mousemove={handleMouseMove}
->
-	<slot />
-</div>
+/>

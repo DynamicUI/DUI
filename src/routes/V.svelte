@@ -20,6 +20,7 @@
 		isMoving = true;
 	}
 
+	/*
 	let el1: any;
 	let one_found = false;
 	function checkOverlap() {
@@ -47,15 +48,11 @@
 		}
 		console.log('Elements are not overlapping');
 	}
+	*/
 
-	mousePosition.subscribe((value) => {
-		if (!isMoving) return;
-		checkOverlap();
-	});
 </script>
 
 <section
-	bind:this={el1}
 	on:mousedown={onMouseDown}
 	style="
 		left: {position.x}px;
