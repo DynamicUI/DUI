@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { VariableBox } from '$lib/components';
 	import { Variable } from '$lib/class/variable';
-	import V from './V.svelte';
 	import { BoxType, Box } from '$lib/class/box';
 	import Sequencer from './Sequencer.svelte';
 
@@ -16,7 +14,35 @@
 	console.log(b.size);
 </script>
 
-<Sequencer />
+<!-- TODO Table-->
+<div class="w-full h-screen flex justify-center items-center ">
+	<div class="p-4 rounded-xl bg-base-300 m-3">
+		<div class="flex flex-row items-center text-lg m-2">
+			<kbd class="kbd">Ctrl</kbd>
+			<div class="m-2" />
+			<kbd class="kbd">A</kbd>
+			<i class="ml-5">add a var</i>
+		</div>
+		<div class="flex flex-row items-center text-lg m-2">
+			<kbd class="kbd">Ctrl</kbd>
+			<div class="m-2" />
+			<kbd class="kbd">R</kbd>
+			<i class="ml-5">reset</i>
+		</div>
+		<div class="flex flex-row items-center text-lg m-2">
+			<kbd class="kbd">Ctrl</kbd>
+			<div class="m-2" />
+			<kbd class="kbd">S</kbd>
+			<i class="ml-5">save</i>
+		</div>
+		<div class="flex flex-row items-center text-lg m-2">
+			<kbd class="kbd">Space</kbd>
+			<i class="ml-5">run</i>
+		</div>
+	</div>
+	<Sequencer />
+	<div class="w-96 m-10" />
+</div>
 
 <!--
 

@@ -13,9 +13,9 @@ export enum VarType {
 /// Class specifique qui contient tout ce qui concerne les Box Varibles
 export class Variable {
 	id: string;
-	name?: string;
+	name: string = "";
 	type?: VarType;
-	value?: any;
+	value: string = "";
 
 	constructor(name: string, type: VarType | undefined = undefined, value: any = null) {
 		Variable.variable_quantity += 1;

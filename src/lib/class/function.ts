@@ -1,5 +1,8 @@
+import { builtins, getParamNames } from '$lib/builtins';
 import { Vec2 } from '$lib/class/vec2';
+import { map } from 'rxjs';
 import type { ConstBoxInfos } from './box';
+import { Input } from './input';
 
 // specifique a la class Variable
 
@@ -13,8 +16,8 @@ export enum VarType {
 /// Class specifique qui contient tout ce qui concerne les Box Varibles
 export class Function_ {
 	id: string;
-	name?: string;
-	args: {name: string, value: null | string, dragover: boolean}[] = [];
+	name: string;
+	args: { name: string; type: string; value: any; draggover: boolean; input: Input }[] = [];
 	body: any[] = [];
 
 	constructor(name: string) {
@@ -23,6 +26,22 @@ export class Function_ {
 			(Date.now() / 1000000 - Function_.quantity).toFixed().toString();
 		this.name = name;
 		Function_.quantity += 1;
+	}
+
+	static fromBuiltIn(builtinName: string) {
+		//let fn: Function | undefined = builtins.get(builtinName);
+		//if (!fn) return undefined;
+		if (!builtins.has(builtinName)) return [];
+
+		return getParamNames(builtins.get(builtinName)).map((arg) => {
+			return {
+				name: arg?.name || '',
+				type: arg?.type || 'any',
+				value: null,
+				draggover: false,
+				input: Input.default(arg?.name || '')
+			};
+		});
 	}
 
 	static CONST_BOX_INFOS: any = {

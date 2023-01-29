@@ -1,8 +1,9 @@
 export class Input {
 	target: any;
 	isWriteMode: boolean;
+	isFocus: boolean = false;
 	name: string; // TODO a quoi sert le name bon sang ?
-	value: string = '';
+	value: any = '';
 
 	constructor(target: any, isWriteMode: boolean, name: string) {
 		this.target = target;
