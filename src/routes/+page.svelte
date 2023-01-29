@@ -16,8 +16,7 @@
 	console.log(b.size);
 </script>
 
-
-<Sequencer></Sequencer>
+<Sequencer />
 
 <!--
 

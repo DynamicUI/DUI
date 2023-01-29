@@ -11,22 +11,18 @@ export enum VarType {
 }
 
 /// Class specifique qui contient tout ce qui concerne les Box Varibles
-export class Variable {
+export class Function_ {
 	id: string;
 	name?: string;
-	type?: VarType;
-	value?: any;
+	args: {name: string, value: null | string, dragover: boolean}[] = [];
+	body: any[] = [];
 
-	constructor(name: string, type: VarType | undefined = undefined, value: any = null) {
-		Variable.variable_quantity += 1;
+	constructor(name: string) {
 		this.id =
-			'variable_declaration_' +
-			((Date.now() / 10000) * Variable.variable_quantity - Variable.variable_quantity)
-				.toFixed()
-				.toString();
+			`function_${Function_.quantity}_` +
+			(Date.now() / 1000000 - Function_.quantity).toFixed().toString();
 		this.name = name;
-		this.type = type;
-		this.value = value;
+		Function_.quantity += 1;
 	}
 
 	static CONST_BOX_INFOS: any = {
@@ -41,7 +37,7 @@ export class Variable {
 		//GAP: 20
 	};
 
-	static variable_quantity = 0;
+	static quantity = 0;
 }
 
 /* reflection sur comment s'occuper de tous ces blocks:

@@ -4,14 +4,14 @@
 	import { Input } from '$lib/class/input';
 	import { Vec2 } from '$lib/class/vec2';
 	import { onMount } from 'svelte';
+	import type { Function_ } from '$lib/class/function';
 
-	export let variable: Variable;
+	export let function_: Function_;
 	export let box: Box;
 	export let delBlock: Function;
 
 	let input_size: Vec2 = new Vec2(box.size.x / 2 - 10, box.size.y - 20);
 	let input_name: Input = Input.default('name');
-	let input_value: Input = Input.default('value');
 
 	onMount(() => {
 		//input_name.isWriteMode = true;
@@ -23,14 +23,8 @@
 				// TODO warning
 				return;
 			}
-			if (!isVarValValid(input_value.value)) {
-				// TODO warning
-				return;
-			}
-			if (input_name.isWriteMode) variable.name = input_name.value;
-			if (input_value.isWriteMode) variable.value = input_value.value;
+			if (input_name.isWriteMode) function_.name = input_name.value;
 			input_name.isWriteMode = false;
-			input_value.isWriteMode = false;
 		}
 	}
 
@@ -40,24 +34,15 @@
 		return true;
 	}
 
-	function isVarValValid(value: string): boolean {
-		// TODO
-		console.log(value);
-		return true;
-	}
-
 	$: {
 		if (!isVarNameValid(input_name.value)) {
 			// TODO warning
-		}
-		if (!isVarValValid(input_value.value)) {
-			// TODO
 		}
 	}
 </script>
 
 <div class="flex items-center mb-10">
-	<span class="badge bg-success" draggable="true" />
+	<span class="badge bg-warning" draggable="true" />
 	<div
 		style="width:{box.size.x}px; height:{box.size.y}px;"
 		class="bg-base-100 flex flex-row rounded-3xl mx-5 justify-center items-center"
@@ -72,7 +57,7 @@
 				input_name.isWriteMode = true;
 			}}
 		>
-			{variable.name}
+			{function_.name}
 		</button>
 		<div class="modal modal-middle {input_name.isWriteMode && 'modal-open'}">
 			<div class="modal-box">
@@ -86,37 +71,30 @@
 				/>
 			</div>
 		</div>
-
-		<!--  value -->
-		<button
-			class="btn bg-inherit border-none"
-			style="
-				width: {input_size.x}px;
-				height: {input_size.y}px;
-			"
-			on:click={() => {
-				input_value.isWriteMode = true;
-			}}
-		>
-			{variable.value}
-		</button>
-		<div class="modal modal-middle {input_value.isWriteMode && 'modal-open'}">
-			<div class="modal-box">
-				<h3 class="font-bold text-lg">Var name</h3>
-				<input
-					bind:value={input_value.value}
-					bind:this={input_value.target}
-					type="text"
-					class="input input-bordered w-full"
-					placeholder="Enter your name"
-				/>
+		{#each function_.args as arg}
+			<div
+				on:dragenter={(e) => {
+					arg.dragover = true;
+					arg = arg;
+					console.log('dragenter', e);
+				}}
+				on:dragleave={(e) => {
+					arg.dragover = false;
+					arg = arg;
+					console.log('dragleave');
+				}}
+			>
+				<button class="btn bg-inherit border-none" disabled={arg.dragover}>
+					{arg.name}
+				</button>
 			</div>
-		</div>
+		{/each}
 	</div>
+
 	<button
 		class="btn btn-circle bg-red-400 hover:bg-red-700"
 		on:click={() => {
-			delBlock(variable.id);
+			delBlock(function_.id);
 		}}
 	>
 		<svg
